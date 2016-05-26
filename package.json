@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/aksonov/react-native-mobx#readme",
   "dependencies": {
-    "mobx": "^2.1.7",
-    "mobx-react": "^3.2.0"
+    "mobx": "^2.2.0",
+    "mobx-react": "^3.3.0"
   }
 }

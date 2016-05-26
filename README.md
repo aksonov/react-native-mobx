@@ -29,19 +29,18 @@ export default () =>
 
 counter.js (model)
 ```jsx
-import {observable, observe, computed, autorun} from 'mobx';
+import {reaction, observable, observe, computed, autorun} from 'mobx';
 import autobind from 'autobind-decorator'
 
 @autobind
 class CounterStore {
   @observable counter = 0;
-  total = -1;
+  total = 0;
 
   constructor(){
-    autorun(() => {
-      this.total += 1 + this.counter*0;
-    } );
+    reaction(()=>this.counter, ()=>this.total++);
   }
+
 
   increase(){
     this.counter++;
