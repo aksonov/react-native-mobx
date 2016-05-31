@@ -22,8 +22,8 @@ import Counter from './components/Counter';
 import store from './model/counter';
 
 export default () =>
-  <Router>
-    <Scene key="launch" component={Counter} hideNavBar store={store}/>
+  <Router store={store}>
+    <Scene key="launch" component={Counter} hideNavBar/>
   </Router>
 ```
 
