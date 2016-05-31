@@ -7,9 +7,12 @@ class CounterStore {
   @observable total = 0;
 
   constructor(){
-    reaction(()=>this.counter, ()=>this.total++);
+    reaction(()=>this.counter, this.increaseTotal);
   }
 
+  @action increaseTotal(){
+    this.total++;
+  }
 
   @action increase(){
     this.counter++;
