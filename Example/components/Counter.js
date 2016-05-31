@@ -7,7 +7,9 @@ import {
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import Button from 'react-native-button';
+import {observer} from 'mobx-react/native';
 
+@observer
 export default class Counter extends Component {
   shouldComponentUpdate(){
     alert('!');
@@ -24,7 +26,6 @@ export default class Counter extends Component {
       <Text>Total clicks: {store.total}</Text>
       <Button onPress={store.increase}>+</Button>
       <Button onPress={store.decrease}>-</Button>
-      <Button onPress={Actions.test}>Go to test page</Button>
     </View>;
 
 
@@ -49,5 +50,3 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
-
-export default Counter;
