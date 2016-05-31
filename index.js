@@ -15,7 +15,11 @@ import {
 import {observer} from "mobx-react/native"
 
 function Router(props){
-  return <OriginalRouter wrapBy={observer} {...props}/>
+  const {navBar, ...newProps} = props;
+  if (navBar){
+    newProps.navBar = observer(navBar);
+  }
+  return <OriginalRouter wrapBy={observer} {...newProps}/>
 }
 export {
   Actions,
