@@ -10,8 +10,11 @@ import Counter from './components/Counter';
 import store from './model/counter';
 import Test from './components/Test';
 
+const OCounter= observer(Counter);
+
+@observer
 export default class Example extends Component {
   render(){
-    return <Counter store={store}/>
+    return <OCounter store={store}/>
   }
 }

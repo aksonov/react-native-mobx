@@ -13,14 +13,46 @@ import {
   Util,
 } from 'react-native-router-flux';
 import {observer} from "mobx-react/native"
+import {autorunAsync} from 'mobx';
 
-function Router(props){
-  const {navBar, ...newProps} = props;
-  if (navBar){
-    newProps.navBar = observer(navBar);
+const handlers = {};
+const originalIterate = Actions.iterate;
+
+function addHandler(root){
+  if (!handlers[root.key] && root.props.state) {
+    const state = root.props.state;
+    handlers[root.key] = autorunAsync(()=> {
+      if (state.active) {
+        console.log("RUN ACTION", root.key);
+        Actions[root.key](state.props);
+      }
+    });
   }
-  return <OriginalRouter wrapBy={observer} {...newProps}/>
 }
+
+Actions.iterate = (root: Scene, parentProps = {}, refsParam = {}, wrapBy) => {
+    let list = root.props.children || [];
+    if (!(list instanceof Array)) {
+      list = [list];
+    }
+    addHandler(root);
+    list.forEach(addHandler);
+    
+  return originalIterate(root, parentProps, refsParam, wrapBy);
+}
+
+@observer
+class Router extends React.Component {
+  render() {
+    const {navBar, ...newProps} = this.props;
+    if (navBar) {
+      newProps.navBar = observer(navBar);
+    }
+    return <OriginalRouter wrapBy={observer} {...newProps}/>
+  }
+}
+
+
 export {
   Actions,
   DefaultRenderer,

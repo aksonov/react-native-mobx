@@ -7,9 +7,8 @@ import {
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import Button from 'react-native-button';
-import {observer} from 'mobx-react/native';
 
-@observer
+
 export default class Counter extends Component {
   shouldComponentUpdate(){
     alert('!');
