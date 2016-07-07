@@ -23,8 +23,13 @@ function addHandler(root){
     const state = root.props.state;
     handlers[root.key] = autorunAsync(()=> {
       if (state.active) {
-        console.log("RUN ACTION", root.key);
-        Actions[root.key](state.props);
+        if (state.props && state.props.pop){
+          console.log("RUN POP ACTION");
+          Actions.pop();
+        } else {
+          console.log("RUN ACTION", root.key);
+          Actions[root.key](state.props);
+        }
       }
     });
   }
