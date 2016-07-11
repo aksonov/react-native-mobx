@@ -13,7 +13,7 @@ import {
   Util,
 } from 'react-native-router-flux';
 import {observer} from "mobx-react/native"
-import {autorunAsync} from 'mobx';
+import {autorunAsync, autorun} from 'mobx';
 
 const handlers = {};
 const originalIterate = Actions.iterate;
@@ -21,7 +21,7 @@ const originalIterate = Actions.iterate;
 function addHandler(root){
   if (!handlers[root.key] && root.props.state) {
     const state = root.props.state;
-    handlers[root.key] = autorunAsync(()=> {
+    handlers[root.key] = autorun(()=> {
       if (state.active) {
         if (state.props && state.props.pop){
           console.log("RUN POP ACTION");
