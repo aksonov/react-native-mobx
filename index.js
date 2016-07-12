@@ -23,6 +23,7 @@ function addHandler(root){
     const state = root.props.state;
     handlers[root.key] = autorun(()=> {
       if (state.active) {
+        console.log(`STATE ${state.id} is ACTIVE`);
         if (state.props && state.props.pop){
           console.log("RUN POP ACTION");
           Actions.pop();
@@ -30,6 +31,10 @@ function addHandler(root){
           console.log("RUN ACTION", root.key);
           Actions[root.key](state.props);
         }
+      }
+      if (state.shouldPop){
+        console.log("RUN SHOULD POP ACTION");
+        Actions.pop();
       }
     });
   }
