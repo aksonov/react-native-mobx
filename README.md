@@ -2,7 +2,7 @@
 React Native Reactive programming using [RNRF](https://github.com/aksonov/react-native-router-flux) and [MobX](https://mobxjs.github.io/mobx/)
 
 ## What is it?
-Thin wrapper around Mobx allows to use all power of reactive progoramming but leave your React Native Components 'framework free' i.e doesn't depend from MobX, Redux, etc.
+Thin wrapper around Mobx allows to use all power of reactive programming but leave your React Native Components 'framework free' i.e doesn't depend from MobX, Redux, etc.
 
 
 ## How to use it?
