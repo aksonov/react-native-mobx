@@ -3,6 +3,7 @@ import {
   Actions,
   DefaultRenderer,
   Modal,
+  ActionConst,
   NavBar,
   Reducer,
   Router as OriginalRouter,
@@ -14,6 +15,7 @@ import {
 } from 'react-native-router-flux';
 import {observer} from "mobx-react/native"
 import {autorunAsync, autorun} from 'mobx';
+import {InteractionManager} from 'react-native';
 
 const handlers = {};
 const originalIterate = Actions.iterate;
@@ -21,34 +23,26 @@ const originalIterate = Actions.iterate;
 function addHandler(root){
   if (!handlers[root.key] && root.props.state) {
     const state = root.props.state;
-    handlers[root.key] = autorun(()=> {
-      if (state.active) {
-        console.log(`STATE ${state.id} is ACTIVE`);
-        if (state.props && state.props.pop){
-          console.log("RUN POP ACTION");
-          Actions.pop();
-        } else {
-          console.log("RUN ACTION", root.key);
-          Actions[root.key](state.props);
-        }
-      }
-      if (state.shouldPop){
-        console.log("RUN SHOULD POP ACTION");
-        Actions.pop();
-      }
-    });
+    state.listener = {
+      onEnter: (props) => {
+        console.log("RUN ACTION", root.key);
+        Actions[root.key](props);
+      },
+    }
+    handlers[root.key] = state.listener;
   }
 }
 
 Actions.iterate = (root: Scene, parentProps = {}, refsParam = {}, wrapBy) => {
-    let list = root.props.children || [];
-    if (!(list instanceof Array)) {
-      list = [list];
-    }
-    addHandler(root);
-    list.forEach(addHandler);
-    
-  return originalIterate(root, parentProps, refsParam, wrapBy);
+  let type = root.props.type || (parentProps.tabs ? ActionConst.JUMP : root.props.state ? ActionConst.PUSH_OR_POP : ActionConst.PUSH);
+  let list = root.props.children || [];
+  if (!(list instanceof Array)) {
+    list = [list];
+  }
+  addHandler(root);
+  list.forEach(addHandler);
+  
+  return originalIterate({...root, props: {...root.props, type}}, parentProps, refsParam, wrapBy);
 }
 
 @observer
@@ -65,6 +59,7 @@ class Router extends React.Component {
 
 export {
   Actions,
+  ActionConst,
   DefaultRenderer,
   Modal,
   NavBar,
