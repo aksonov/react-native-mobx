@@ -26,6 +26,7 @@
   "homepage": "https://github.com/aksonov/react-native-mobx#readme",
   "dependencies": {
     "mobx": "^2.2.0",
-    "mobx-react": "^3.3.0"
+    "mobx-react": "^3.3.0",
+    "react-native-router-flux": "^3.31.2"
   }
 }
