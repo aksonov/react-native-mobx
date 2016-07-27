@@ -28,7 +28,10 @@ function addHandler(root){
         console.log("RUN ACTION", root.key);
         Actions[root.key](props);
       },
-    }
+      onExit: (props) => {
+        Actions.pop();
+      }
+    };
     handlers[root.key] = state.listener;
   }
 }
