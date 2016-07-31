@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View} from 'react-native';
-import {Router, Scene} from 'react-native-mobx';
+import {Router, Scene} from 'react-native-router-flux';
 import {useStrict} from 'mobx';
 import {observer} from 'mobx-react/native';
 useStrict(true);
