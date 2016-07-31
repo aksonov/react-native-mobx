@@ -15,7 +15,7 @@ Example of reactive model counter:
 Example.js:
 ```jsx
 import React from 'react';
-import {Router, Scene} from 'react-native-mobx';
+import {Router, Scene} from 'react-native-router-flux';
 
 // view and model for Counter scene
 import Counter from './components/Counter';
