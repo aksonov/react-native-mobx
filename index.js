@@ -27,11 +27,13 @@ function addHandler(root){
       onEnter: (props) => {
         console.log("RUN ACTION", root.key);
         Actions[root.key](props);
+        //InteractionManager.runAfterInteractions(()=>Actions[root.key](props));
       },
       onExit: (props) => {
         Actions.pop();
       }
     };
+    console.log(`add lister for ${root.key}`)
     handlers[root.key] = state.listener;
   }
 }
