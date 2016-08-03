@@ -8,7 +8,7 @@ import {
   Reducer,
   Router as OriginalRouter,
   Scene,
-  Switch,
+  Switch as OriginalSwitch,
   TabBar,
   getInitialState,
   Util,
@@ -61,6 +61,31 @@ class Router extends React.Component {
   }
 }
 
+class Switch extends React.Component {
+  render() {
+    const selector = props => {
+      const navState = props.navigationState;
+      const statem = props.statem;
+      if (!statem) console.error('statem/selector should be defined.');
+      let selectedKey = undefined;
+      // support Statem - Harel statecharts machine!
+      navState.children.forEach((el, i) => {
+        if (!(el.default || el.state)) {
+          console.error(`Either default or state should be defined for element=${el.key}`);
+        }
+        if (el.default) {
+          selectedKey = el.sceneKey;
+        } else {
+          if (el.state.active) {
+            selectedKey = el.sceneKey;
+          }
+        }
+      });
+      return selectedKey;
+    }
+    return <OriginalSwitch selector={selector} {...this.props}/>
+  }
+}
 
 export {
   Actions,
