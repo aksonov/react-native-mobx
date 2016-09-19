@@ -8,7 +8,6 @@ useStrict(true);
 // view and model for Counter scene
 import Counter from './components/Counter';
 import store from './model/counter';
-import Test from './components/Test';
 
 const OCounter= observer(Counter);
 
