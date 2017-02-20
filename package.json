@@ -1,11 +1,12 @@
 {
   "name": "react-native-mobx",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Make your react native app reactive with MobX",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "typings": "index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aksonov/react-native-mobx.git"
