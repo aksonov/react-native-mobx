@@ -1,3 +1,5 @@
+## Package is obsolete with latest react-native-router-flux v4 - RNRF allows to wrap all scenes and navbar by passing `wrapBy` param (equal to MobX `observer`) to `<Router>`
+
 # react-native-mobx
 React Native Reactive programming using [RNRF](https://github.com/aksonov/react-native-router-flux) and [MobX](https://mobxjs.github.io/mobx/)
 
