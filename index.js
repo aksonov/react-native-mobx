@@ -50,16 +50,12 @@ Actions.iterate = (root: Scene, parentProps = {}, refsParam = {}, wrapBy) => {
   return originalIterate({...root, props: {...root.props, type}}, parentProps, refsParam, wrapBy);
 }
 
-@observer
-class Router extends React.Component {
-  render() {
-    const {navBar, ...newProps} = this.props;
-    if (navBar) {
-      newProps.navBar = observer(navBar);
-    }
-    return <OriginalRouter wrapBy={observer} {...newProps}/>
+const Router = observer(({navBar, ...newProps}) => {
+  if (navBar) {
+    newProps.navBar = observer(navBar);
   }
-}
+  return <OriginalRouter wrapBy={observer} {...newProps}/>
+})
 
 export {
   Actions,
